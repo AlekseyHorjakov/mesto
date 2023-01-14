@@ -1,0 +1,14 @@
+.element__button-like {
+    background-image: url(../../../images/icon__like.svg);
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: contain;
+    height: 19px;
+    width: 22px;
+    border: 0;
+}
+
+.element__button-like:active {
+    background-image: url(../../../images/icon__like_active.svg);
+}
