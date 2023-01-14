@@ -1,24 +1,24 @@
 .elements {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(282px,1fr));
-    gap: 15px 17px;
-    margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
+  gap: 15px 17px;
+  margin: auto;
 }
 
 @media screen and (max-width: 1024px) {
   .elements {
-    width: calc(100% - 148px);
+      width: calc(100% - 148px);
   }
 }
 
 @media screen and (max-width: 768px) {
   .elements {
-    width: calc(100% - 96px);
+      width: calc(100% - 96px);
   }
 }
 
 @media screen and (max-width: 465px) {
   .elements {
-    width: calc(100% - 38px);
+      width: calc(100% - 38px);
   }
 }

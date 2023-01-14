@@ -16,3 +16,4 @@ Mesto - это интерактивная страница, куда можно 
 
 Ссылка на GitHub Pages: 
 
+https://alekseyhorjakov.github.io/mesto/

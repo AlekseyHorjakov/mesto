@@ -8,9 +8,14 @@
     width: 32px;
     border: 0;
     position: absolute;
-    transform: translate(calc(100% + 10px),calc(-100% - 10px));
+    transform: translate(calc(100% + 10px), calc(-100% - 10px));
     top: 0;
     right: 0;
+    transition: opacity 0.3s;
+}
+
+.popup__close-button:hover {
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 425px) {
@@ -19,4 +24,4 @@
         width: 20px;
         transform: translateY(calc(-100% - 16px));
     }
-  }
+}

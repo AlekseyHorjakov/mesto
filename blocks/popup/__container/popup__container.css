@@ -14,17 +14,17 @@
     .popup__container {
         width: calc(100% - 144px);
     }
-  }
+}
 
 @media screen and (max-width: 768px) {
     .popup__container {
         width: calc(100% - 96px);
     }
-  }
+}
 
 @media screen and (max-width: 425px) {
     .popup__container {
         padding: 25px 22px;
         width: calc(100% - 38px);
     }
-  }
+}
