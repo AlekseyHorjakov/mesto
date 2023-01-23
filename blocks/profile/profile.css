@@ -1,21 +1,8 @@
 .profile {
-  margin: 0 auto;
-  padding: 40px 0 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 26px;
-}
-
-@media screen and (max-width: 769px) {
-  .profile {
-      flex-direction: column;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .profile {
-      padding-bottom: 36px;
-      width: calc(100% - 38px);
-  }
+    margin: 0;
+    padding: 0;
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

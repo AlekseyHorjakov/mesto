@@ -1,105 +1,76 @@
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="./pages/index.css" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Mesto</title>
-    </head>
-    <body class="page">
-        <header class="header">
-            <img class="header__logo" src="./images/header__logo.svg" alt="Логотип сайта Место. Россия" />
-        </header>
-        <main class="content">
-            <section class="profile">
-                <div class="profile__avatar">
-                    <img class="profile__avatar-image" src="./images/avatar.jpg" alt="Фотография пользователя" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto.Russia 2023</title>
+</head>
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./images/logo.svg" alt="Mesto логотип">
+    </header>
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя">
+            <div class="profile__info">
+                <div class="profile__block">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button class="profile__edit" type="button"></button>
+            </div>
+                <p class="profile__profession">Исследователь океана</p>
+            </div>
+            <button class="profile__button-add" type="button"></button>
+        </section>
+        <section class="elements">
+            <div class="element">
+                <img class="element__image" src="./images/Novorossiysk.jpg" alt="Новороссийск">
+                <div class="element__block">
+                    <h2 class="element__name">Новороссийск</h2>
+                    <button class="element__button-like"></button>
                 </div>
-                <div class="profile__info">
-                    <div class="profile__name-block">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="profile__button profile__button_edit" type="button"></button>
-                    </div>
-                    <p class="profile__profession">Исследователь океана</p>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Orenburg.jpg" alt="Оренбург">
+                <div class="element__block">
+                    <h2 class="element__name">Оренбург</h2>
+                    <button class="element__button-like"></button>
                 </div>
-                <button class="profile__button profile__button_add" type="button"></button>
-            </section>
-            <section class="elements" aria-label="Фотограффии">
-                <div class="element">
-                    <img class="element__image" src="./images/Orenburg.jpg" alt="Оренбург" />
-                    <div class="element__description">
-                        <h2 class="element__name">Оренбург</h2>
-                        <div class="element__like">
-                            <button class="element__button-like" type="button"></button>
-                        </div>
-                    </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/samara.jpg" alt="Самара">
+                <div class="element__block">
+                    <h2 class="element__name">Самара</h2>
+                    <button class="element__button-like"></button>
                 </div>
-                <div class="element">
-                    <img class="element__image" src="./images/Novorossiysk.jpg" alt="Новороссийск" />
-                    <div class="element__description">
-                        <h2 class="element__name">Новороссийск</h2>
-                        <div class="element__like">
-                            <button class="element__button-like" type="button"></button>
-                        </div>
-                    </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/UFA.jpeg" alt="Уфа">
+                <div class="element__block">
+                    <h2 class="element__name">Уфа</h2>
+                    <button class="element__button-like"></button>
                 </div>
-                <div class="element">
-                    <img class="element__image" src="./images/samara.jpg" alt="Самара" />
-                    <div class="element__description">
-                        <h2 class="element__name">Самара</h2>
-                        <div class="element__like">
-                            <button class="element__button-like" type="button"></button>
-                        </div>
-                    </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Gelendjik.jpg" alt="Геленджик">
+                <div class="element__block">
+                    <h2 class="element__name">Геленджик</h2>
+                    <button class="element__button-like"></button>
                 </div>
-                <div class="element">
-                    <img class="element__image" src="./images/UFA.jpeg" alt="Уфа" />
-                    <div class="element__description">
-                        <h2 class="element__name">Уфа</h2>
-                        <div class="element__like">
-                            <button class="element__button-like" type="button"></button>
-                        </div>
-                    </div>
+            </div>
+            <div class="element">
+                <img class="element__image" src="./images/Moscow.jpg" alt="Москва">
+                <div class="element__block">
+                    <h2 class="element__name">Москва</h2>
+                    <button class="element__button-like"></button>
                 </div>
-                <div class="element">
-                    <img class="element__image" src="./images/Gelendjik.jpg" alt="Геленджик" />
-                    <div class="element__description">
-                        <h2 class="element__name">Геленджик</h2>
-                        <div class="element__like">
-                            <button class="element__button-like" type="button"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/Moscow.jpg" alt="Москва" />
-                    <div class="element__description">
-                        <h2 class="element__name">Москва</h2>
-                        <div class="element__like">
-                            <button class="element__button-like" type="button"></button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer__copiright">© 2023 Mesto Russia</p>
-        </footer>
-        <section class="popup">
-            <div class="popup__container">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="profileEditPopupForm">
-                    <label class="popup__field">
-                        <input class="popup__input popup__input_name" type="text" placeholder="Имя" name="name" id="name-input" />
-                    </label>
-                    <label class="popup__field">
-                        <input class="popup__input popup__input_profession" type="text" placeholder="Профессия" name="profession" id="profession-input" />
-                    </label>
-                    <button class="popup__save-button" type="submit">Сохранить</button>
-                </form>
-                <button class="popup__close-button" type="button"></button>
             </div>
         </section>
-        <script src="./scripts/index.js"></script>
-    </body>
+    </main>
+    <footer class="footer">
+        <h3 class="footer__info">© 2023 Mesto Russia</h3>
+    </footer>
+    <section class="popup"></section>
+</body>
 </html>
