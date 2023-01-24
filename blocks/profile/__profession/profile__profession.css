@@ -14,14 +14,13 @@
     .profile__profession {
         text-align: center;
     }
-  }
-  
-  @media screen and (max-width: 425px) {
+}
+
+@media screen and (max-width: 425px) {
     .profile__profession {
         margin: 0;
         margin-right: 32px;
         font-size: 14px;
         line-height: 17px;
     }
-  }
-  
+}

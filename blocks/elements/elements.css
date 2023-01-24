@@ -3,7 +3,7 @@
     margin-top: 51px;
     padding: 0;
     display: grid;
-    grid-template-columns:repeat(auto-fill, minmax(282px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(282px, 1fr));
     gap: 27px 17px;
 }
 
@@ -11,5 +11,4 @@
     .elements {
         margin-top: 36px;
     }
-  }
-  
+}

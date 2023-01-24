@@ -1,27 +1,26 @@
 header {
-    border-bottom: 1px solid #545454;
-    margin: 0 auto;
-    max-width: calc(100% - 400px);
-    margin-top: 45px;
+  border-bottom: 1px solid #545454;
+  margin: 0 auto;
+  max-width: calc(100% - 400px);
+  margin-top: 45px;
 }
 
 @media screen and (max-width: 1024px) {
-    .header {
-        max-width: calc(100% - 148px);
-    }
+  .header {
+      max-width: calc(100% - 148px);
   }
+}
 
 @media screen and (max-width: 768px) {
-    .header {
-        max-width: calc(100% - 96px);
-    }
+  .header {
+      max-width: calc(100% - 96px);
   }
-  
-  @media screen and (max-width: 425px) {
-    .header {
-        box-sizing: border-box;
-        max-width:calc(100% - 54px);
-        margin-top: 28px;
-    }
+}
+
+@media screen and (max-width: 425px) {
+  .header {
+      box-sizing: border-box;
+      max-width: calc(100% - 54px);
+      margin-top: 28px;
   }
-  
+}
