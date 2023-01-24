@@ -3,3 +3,23 @@
     padding: 0;
     max-width: calc(100% - 400px);
 }
+
+@media screen and (max-width: 1041px) {
+    .footer {
+        max-width: calc(100% - 148px);
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .footer {
+        max-width: calc(100% - 96px);
+    }
+  }
+  
+  @media screen and (max-width: 425px) {
+    .footer {
+        max-width: calc(100% - 38px);
+        margin-top: 50px;
+        margin-bottom: 33px;
+    }
+  }
