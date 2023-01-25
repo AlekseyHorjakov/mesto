@@ -8,6 +8,7 @@
     height: 50px;
     transition: opacity 0.3s;
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 
 .profile__button-add:hover {

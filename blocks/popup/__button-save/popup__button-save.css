@@ -11,4 +11,5 @@
     height: 50px;
     width: 100%;
     transition: opacity 0.3s;
+    cursor: pointer;
 }
