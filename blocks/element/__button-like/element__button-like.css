@@ -9,4 +9,9 @@
     height: 19px;
     cursor: pointer;
     min-width: 22px;
+    transition: opacity 0.3s;
+}
+
+.element__button-like:hover {
+    opacity: 0.6;
 }
