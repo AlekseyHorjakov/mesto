@@ -14,8 +14,13 @@
     cursor: pointer;
 }
 
+.popup__button-save:hover {
+    opacity: 0.8;
+}
+
 @media screen and (max-width: 425px) {
     .popup__button-save {
+        height: 46px;
         font-size: 14px;
         line-height: 17px;
     }
