@@ -22,6 +22,9 @@
   .header {
       box-sizing: border-box;
       max-width: calc(100% - 54px);
-      margin-top: 28px;
+      margin: 0;
+      padding-top: 28px;
+      padding-left: 27px;
+      padding-right: 27px;
   }
 }

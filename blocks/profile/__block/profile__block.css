@@ -4,6 +4,13 @@
     gap: 24px;
 }
 
+@media screen and (max-width: 740px) {
+    .profile__block {
+        justify-content: center;
+    }
+}
+
+
 @media screen and (max-width: 425px) {
     .profile__block {
         gap: 9px;
