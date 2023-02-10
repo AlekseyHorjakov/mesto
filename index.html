@@ -23,55 +23,13 @@
                 </div>
                 <button class="profile__button-add" type="button"></button>
             </section>
-            <section class="elements">
-                <div class="element">
-                    <img class="element__image" src="./images/Novorossiysk.jpg" alt="Новороссийск" />
-                    <div class="element__block">
-                        <h2 class="element__name">Новороссийск</h2>
-                        <button class="element__button-like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/Orenburg.jpg" alt="Оренбург" />
-                    <div class="element__block">
-                        <h2 class="element__name">Оренбург</h2>
-                        <button class="element__button-like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/samara.jpg" alt="Самара" />
-                    <div class="element__block">
-                        <h2 class="element__name">Самара</h2>
-                        <button class="element__button-like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/UFA.jpeg" alt="Уфа" />
-                    <div class="element__block">
-                        <h2 class="element__name">Уфа</h2>
-                        <button class="element__button-like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/Gelendjik.jpg" alt="Геленджик" />
-                    <div class="element__block">
-                        <h2 class="element__name">Геленджик</h2>
-                        <button class="element__button-like" type="button"></button>
-                    </div>
-                </div>
-                <div class="element">
-                    <img class="element__image" src="./images/Moscow.jpg" alt="Москва" />
-                    <div class="element__block">
-                        <h2 class="element__name">Москва</h2>
-                        <button class="element__button-like" type="button"></button>
-                    </div>
-                </div>
+            <section class="elements">               
             </section>
         </main>
         <footer class="footer">
             <p class="footer__info">© 2023 Mesto Russia</p>
         </footer>
-        <div class="popup">
+        <div class="popup popup_type_edit">
             <div class="popup__container">
                 <form class="popup__form" name="editPopupForm">
                     <h2 class="popup__edit-profile">Редактировать профиль</h2>
@@ -84,6 +42,36 @@
                 <button class="popup__button-close" type="button"></button>
             </div>
         </div>
+        <div class="popup popup_type_add">
+            <div class="popup__container">
+                <form class="popup__form" name="addPopupForm">
+                    <h2 class="popup__edit-profile">Новое место</h2>
+                    <fieldset class="popup__input-block">
+                        <input class="popup__input popup__input_type_place" type="text" name="elementPopupInputPlace" placeholder="Название" />
+                        <input class="popup__input popup__input_type_link" type="url" name="elementPopupInputLink" placeholder="Ссылка на картинку" />
+                    </fieldset>
+                    <button class="popup__button-save" type="submit">Сохранить</button>
+                </form>
+                <button class="popup__button-close popup_type_add-btn-close" type="button"></button>
+            </div>
+        </div>
+        <div class="popup popup_type_image">
+            <div class="popup__container-image">
+                <img class="popup__image" src="" alt="">
+                <button class="popup__button-close" type="button"></button>
+            </div>
+        </div>
+        
+        <template id="elements">
+            <div class="element">
+                <img class="element__image" src="" alt="" />
+                <div class="element__block">
+                    <h2 class="element__name"></h2>
+                    <button class="element__button-like" type="button"></button>
+                </div>
+                <button class="element__button-delete" type="button"></button>
+            </div>
+            </template>
         <script src="./scripts/index.js"></script>
     </body>
 </html>
