@@ -23,8 +23,7 @@
                 </div>
                 <button class="profile__button-add" type="button"></button>
             </section>
-            <section class="elements">               
-            </section>
+            <section class="elements"></section>
         </main>
         <footer class="footer">
             <p class="footer__info">© 2023 Mesto Russia</p>
@@ -44,7 +43,7 @@
         </div>
         <div class="popup popup_type_add">
             <div class="popup__container">
-                <form class="popup__form" name="addPopupForm">
+                <form class="popup__form popup__form_add" name="addPopupForm">
                     <h2 class="popup__edit-profile">Новое место</h2>
                     <fieldset class="popup__input-block">
                         <input class="popup__input popup__input_type_place" type="text" name="elementPopupInputPlace" placeholder="Название" />
@@ -57,11 +56,12 @@
         </div>
         <div class="popup popup_type_image">
             <div class="popup__container-images">
-                <img class="popup__image" src="" alt="">
+                <img class="popup__image" src="" alt="" />
+                <h2 class="popup__image-name"></h2>
                 <button class="popup__button-close" type="button"></button>
             </div>
         </div>
-        
+
         <template id="elements">
             <div class="element">
                 <img class="element__image" src="" alt="" />
@@ -71,7 +71,7 @@
                 </div>
                 <button class="element__button-delete" type="button"></button>
             </div>
-            </template>
+        </template>
         <script src="./scripts/index.js"></script>
     </body>
 </html>

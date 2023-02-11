@@ -20,10 +20,10 @@ const popupAddCloseElement = document.querySelector(".popup_type_add-btn-close")
 
 const openPopup = function (popup) {
     popup.classList.add("popup_opened");
-    popupNameElement.value = profileNameElement.textContent;
-    popupProfessionElement.value = profileProfessionElement.textContent;
 };
 popupEditButtonElement.addEventListener("click", function () {
+    popupNameElement.value = profileNameElement.textContent;
+    popupProfessionElement.value = profileProfessionElement.textContent;
     openPopup(popupEditElement);
 });
 
@@ -50,7 +50,7 @@ const textWrapping = function (evt) {
     evt.preventDefault();
     profileNameElement.textContent = popupNameElement.value;
     profileProfessionElement.textContent = popupProfessionElement.value;
-    closePopup();
+    closePopup(popupEditElement);
 };
 popupForm.addEventListener("submit", textWrapping);
 
@@ -71,12 +71,19 @@ const containerElements = document.querySelector(".elements");
 const elementTemplate = document.querySelector("#elements");
 const inputPlace = document.querySelector(".popup__input_type_place");
 const inputPlaceName = document.querySelector(".popup__input_type_name");
+const popupZoomPicture = document.querySelector(".popup__image");
+const popupZoomDescription = document.querySelector(".popup__image-name");
+const popupImage = document.querySelector(".popup_type_image");
+const popupAdd = document.querySelector(".popup__form_add");
 
 const createCard = (name, link) => {
     const card = elementTemplate.content.querySelector(".element").cloneNode(true);
-    card.querySelector(".element__image").src = link;
-    card.querySelector(".element__name").textContent = name;
-    card.querySelector(".element__name").alt = name;
+    const cardName = card.querySelector(".element__name");
+    const cardImage = card.querySelector(".element__image");
+    cardImage.src = link;
+    cardName.textContent = name;
+    cardImage.alt = name;
+    cardImage.addEventListener("click", () => popupZoom(link, name));
 
     //  Кнопка активации лайка
 
@@ -95,13 +102,13 @@ const createCard = (name, link) => {
 
     // Увеличенное изображение
 
-    const popupImage = document.querySelector(".popup_type_image");
-    const cardImage = card.querySelector('.element__image');
+    function popupZoom(link, name) {
+        popupZoomPicture.src = link;
+        popupZoomPicture.alt = name;
+        popupZoomDescription.textContent = name;
+        openPopup(popupImage);
+    }
 
-    cardImage.addEventListener("click", function () {
-        popupImage.classList.add("popup_opened");
-        cardImage.setAttribute('src' , card.querySelector('.element__image').getAttribute('src'));
-    });
     popupImage.addEventListener("click", function () {
         closePopup(popupImage);
     });
@@ -117,21 +124,19 @@ initialCards.forEach((item) => {
     renderCard(item.name, item.link);
 });
 
-
-
-
-
-
-
 // Добавление новой карточки
 
-const addCard = function () {
+const addCard = function (evt) {
     evt.preventDefault();
-    inputPlaceName.textContent = inputPlaceName.value;
-    inputPlace.src = inputPlace.value;
-    closePopup(popupImage);
+    let form = evt.target.querySelector(".popup__input-block");
+    const popupCardNameInput = form.querySelector(".popup__input_type_place");
+    const popupCardPLinkInput = form.querySelector(".popup__input_type_link");
+
+    let name = popupCardNameInput.value;
+    let link = popupCardPLinkInput.value;
+
+    renderCard(name, link);
+    closePopup(popupAddElement);
 };
-popupForm.addEventListener("submit", addCard);
-containerElements.prepend(createCard(name, link));
 
-
+popupAdd.addEventListener("submit", (evt) => addCard(evt));
