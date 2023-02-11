@@ -14,7 +14,7 @@ let popupProfessionElement = document.querySelector(".popup__input_type_professi
 
 const popupAddElement = document.querySelector(".popup_type_add");
 const popupAddButtonElement = document.querySelector(".profile__button-add");
-const popupAddCloseElement = document.querySelector(".popup_type_add-btn-close");
+const popupAddCloseElement = document.querySelector(".popup_type_close");
 
 // Открываем окна
 
@@ -38,6 +38,7 @@ const closePopup = function (popup) {
 };
 popupCloseButtonElement.addEventListener("click", function () {
     closePopup(popupEditElement);
+    closePopup(popupAddElement);
 });
 
 popupAddCloseElement.addEventListener("click", function () {
@@ -130,10 +131,10 @@ const addCard = function (evt) {
     evt.preventDefault();
     let form = evt.target.querySelector(".popup__input-block");
     const popupCardNameInput = form.querySelector(".popup__input_type_place");
-    const popupCardLinkInput = form.querySelector(".popup__input_type_link");
+    const popupCardPLinkInput = form.querySelector(".popup__input_type_link");
 
     let name = popupCardNameInput.value;
-    let link = popupCardLinkInput.value;
+    let link = popupCardPLinkInput.value;
 
     renderCard(name, link);
     closePopup(popupAddElement);
