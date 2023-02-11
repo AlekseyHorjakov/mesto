@@ -14,7 +14,7 @@ let popupProfessionElement = document.querySelector(".popup__input_type_professi
 
 const popupAddElement = document.querySelector(".popup_type_add");
 const popupAddButtonElement = document.querySelector(".profile__button-add");
-const popupAddCloseElement = document.querySelector(".popup_type_close");
+const popupAddCloseElement = document.querySelector(".popup__close");
 
 // Открываем окна
 
