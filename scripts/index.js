@@ -130,10 +130,10 @@ const addCard = function (evt) {
     evt.preventDefault();
     let form = evt.target.querySelector(".popup__input-block");
     const popupCardNameInput = form.querySelector(".popup__input_type_place");
-    const popupCardPLinkInput = form.querySelector(".popup__input_type_link");
+    const popupCardLinkInput = form.querySelector(".popup__input_type_link");
 
     let name = popupCardNameInput.value;
-    let link = popupCardPLinkInput.value;
+    let link = popupCardLinkInput.value;
 
     renderCard(name, link);
     closePopup(popupAddElement);
