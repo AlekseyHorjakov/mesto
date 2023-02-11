@@ -22,12 +22,12 @@ const openPopup = function (popup) {
     popup.classList.add("popup_opened");
     popupNameElement.value = profileNameElement.textContent;
     popupProfessionElement.value = profileProfessionElement.textContent;
-}
-popupEditButtonElement.addEventListener("click" , function () {
+};
+popupEditButtonElement.addEventListener("click", function () {
     openPopup(popupEditElement);
 });
 
-popupAddButtonElement.addEventListener("click" , function () {
+popupAddButtonElement.addEventListener("click", function () {
     openPopup(popupAddElement);
 });
 
@@ -35,75 +35,103 @@ popupAddButtonElement.addEventListener("click" , function () {
 
 const closePopup = function (popup) {
     popup.classList.remove("popup_opened");
-}
-popupCloseButtonElement.addEventListener("click" , function () {
+};
+popupCloseButtonElement.addEventListener("click", function () {
     closePopup(popupEditElement);
 });
 
-popupAddCloseElement.addEventListener("click" , function () {
+popupAddCloseElement.addEventListener("click", function () {
     closePopup(popupAddElement);
 });
 
 // Меняем данные пользователя
 
 const textWrapping = function (evt) {
-    evt.preventDefault ();
+    evt.preventDefault();
     profileNameElement.textContent = popupNameElement.value;
     profileProfessionElement.textContent = popupProfessionElement.value;
     closePopup();
-} 
-    popupForm.addEventListener("submit" , textWrapping);
+};
+popupForm.addEventListener("submit", textWrapping);
 
-    // При загрузке на странице загружаются 6 карточек, которые добавит JavaScript
-    
-    const initialCards = [
-        { name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-        { name: 'Челябинская область', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-        { name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-        { name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-        { name: 'Холмогорский район', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-        { name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'}
-      ];
+// При загрузке на странице загружаются 6 карточек, которые добавит JavaScript
 
-            //   Определяем место, куда добавляются карточки и выгружаем туда содержимое template
+const initialCards = [
+    { name: "Архыз", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" },
+    { name: "Челябинская область", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" },
+    { name: "Иваново", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" },
+    { name: "Камчатка", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" },
+    { name: "Холмогорский район", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" },
+    { name: "Байкал", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" },
+];
 
-      const containerElements = document.querySelector('.elements');
-      const elementTemplate = document.querySelector('#elements');
-      
-          const createCard = (name, link) => {
-          const card = elementTemplate.content.querySelector('.element').cloneNode(true);
-          card.querySelector('.element__image').src=link;
-          card.querySelector('.element__name').textContent= name;
-          card.querySelector('.element__name').alt= name;  
-          
-            //  Кнопка активации лайка
+//   Определяем место, куда добавляются карточки и выгружаем туда содержимое template
 
-          const buttonLike = card.querySelector('.element__button-like');   
-          buttonLike.addEventListener('click', function(evt){
-            const evtLike = evt.target;
-            evtLike.classList.toggle('element__button-like_active');
-          });
+const containerElements = document.querySelector(".elements");
+const elementTemplate = document.querySelector("#elements");
+const inputPlace = document.querySelector(".popup__input_type_place");
+const inputPlaceName = document.querySelector(".popup__input_type_name");
 
-            //   Кнопка удаления карточки
+const createCard = (name, link) => {
+    const card = elementTemplate.content.querySelector(".element").cloneNode(true);
+    card.querySelector(".element__image").src = link;
+    card.querySelector(".element__name").textContent = name;
+    card.querySelector(".element__name").alt = name;
 
-        const buttonDell = card.querySelector('.element__button-delete');
-        buttonDell.addEventListener('click', () => {
-            card.remove();
-        });
-          return card;
-          };
-      
-          const renderCard = (name, link) => {
-              containerElements.append(createCard(name, link));
-          };
-      
-          initialCards.forEach(item => {
-            renderCard(item.name, item.link)});
+    //  Кнопка активации лайка
 
-            // Увеличенное изображение картинки
+    const buttonLike = card.querySelector(".element__button-like");
+    buttonLike.addEventListener("click", function (evt) {
+        const evtLike = evt.target;
+        evtLike.classList.toggle("element__button-like_active");
+    });
 
-            const popupImage = document.querySelector('.popup_type_image');
+    //   Кнопка удаления карточки
 
-            card.querySelector('element__image').addEventListener('click', () => {
+    const buttonDell = card.querySelector(".element__button-delete");
+    buttonDell.addEventListener("click", () => {
+        card.remove();
+    });
 
-            });
+    // Увеличенное изображение
+
+    const popupImage = document.querySelector(".popup_type_image");
+    const cardImage = card.querySelector('.element__image');
+
+    cardImage.addEventListener("click", function () {
+        popupImage.classList.add("popup_opened");
+        cardImage.setAttribute('src' , card.querySelector('.element__image').getAttribute('src'));
+    });
+    popupImage.addEventListener("click", function () {
+        closePopup(popupImage);
+    });
+
+    return card;
+};
+
+const renderCard = (name, link) => {
+    containerElements.append(createCard(name, link));
+};
+
+initialCards.forEach((item) => {
+    renderCard(item.name, item.link);
+});
+
+
+
+
+
+
+
+// Добавление новой карточки
+
+const addCard = function () {
+    evt.preventDefault();
+    inputPlaceName.textContent = inputPlaceName.value;
+    inputPlace.src = inputPlace.value;
+    closePopup(popupImage);
+};
+popupForm.addEventListener("submit", addCard);
+containerElements.prepend(createCard(name, link));
+
+
