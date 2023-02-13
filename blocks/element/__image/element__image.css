@@ -4,4 +4,10 @@
     object-position: center;
     height: 282px;
     width: 100%;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.element__image:hover {
+    opacity: 0.8;
 }

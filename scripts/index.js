@@ -2,19 +2,19 @@
 
 const popupEditElement = document.querySelector(".popup_type_edit");
 const popupEditButtonElement = document.querySelector(".profile__edit");
-const popupCloseButtonElement = document.querySelector(".popup__button-close");
+const popupEditCloseButtonElement = document.querySelector(".popup__button-close");
 const profileElement = document.querySelector(".profile");
-const popupForm = document.querySelector(".popup__form");
-let profileNameElement = profileElement.querySelector(".profile__name");
-let profileProfessionElement = profileElement.querySelector(".profile__profession");
-let popupNameElement = document.querySelector(".popup__input_type_name");
-let popupProfessionElement = document.querySelector(".popup__input_type_profession");
+const popupEditForm = document.querySelector(".popup__form");
+const profileNameElement = profileElement.querySelector(".profile__name");
+const profileProfessionElement = profileElement.querySelector(".profile__profession");
+const popupNameElement = document.querySelector(".popup__input_type_name");
+const popupProfessionElement = document.querySelector(".popup__input_type_profession");
 
 // Объявляем переменные для окна добавление фотограффий
 
 const popupAddElement = document.querySelector(".popup_type_add");
 const popupAddButtonElement = document.querySelector(".profile__button-add");
-const popupAddCloseElement = document.querySelector(".popup__close");
+const popupAddCloseButtonElement = document.querySelector(".popup__close");
 
 // Открываем окна
 
@@ -36,39 +36,29 @@ popupAddButtonElement.addEventListener("click", function () {
 const closePopup = function (popup) {
     popup.classList.remove("popup_opened");
 };
-popupCloseButtonElement.addEventListener("click", function () {
+popupEditCloseButtonElement.addEventListener("click", function () {
     closePopup(popupEditElement);
-    closePopup(popupAddElement);
 });
 
-popupAddCloseElement.addEventListener("click", function () {
+popupAddCloseButtonElement.addEventListener("click", function () {
     closePopup(popupAddElement);
 });
 
 // Меняем данные пользователя
 
-const textWrapping = function (evt) {
+const editProfile = function (evt) {
     evt.preventDefault();
     profileNameElement.textContent = popupNameElement.value;
     profileProfessionElement.textContent = popupProfessionElement.value;
     closePopup(popupEditElement);
 };
-popupForm.addEventListener("submit", textWrapping);
+popupEditForm.addEventListener("submit", editProfile);
 
 // При загрузке на странице загружаются 6 карточек, которые добавит JavaScript
 
-const initialCards = [
-    { name: "Архыз", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" },
-    { name: "Челябинская область", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" },
-    { name: "Иваново", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" },
-    { name: "Камчатка", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" },
-    { name: "Холмогорский район", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" },
-    { name: "Байкал", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" },
-];
-
 //   Определяем место, куда добавляются карточки и выгружаем туда содержимое template
 
-const containerElements = document.querySelector(".elements");
+const cardsContainer = document.querySelector(".elements");
 const elementTemplate = document.querySelector("#elements");
 const inputPlace = document.querySelector(".popup__input_type_place");
 const inputPlaceName = document.querySelector(".popup__input_type_name");
@@ -76,6 +66,11 @@ const popupZoomPicture = document.querySelector(".popup__image");
 const popupZoomDescription = document.querySelector(".popup__image-name");
 const popupImage = document.querySelector(".popup_type_image");
 const popupAdd = document.querySelector(".popup__form_add");
+const popupImageCloseButtonElement = popupImage.querySelector('.popup__button-close');
+const popupCardNameInput = document.querySelector(".popup__input_type_place");
+const popupCardLinkInput = document.querySelector(".popup__input_type_link");
+const popupAddForm = document.querySelector('.popup__form_add');
+
 
 const createCard = (name, link) => {
     const card = elementTemplate.content.querySelector(".element").cloneNode(true);
@@ -110,7 +105,8 @@ const createCard = (name, link) => {
         openPopup(popupImage);
     }
 
-    popupImage.addEventListener("click", function () {
+
+    popupImageCloseButtonElement.addEventListener("click", function () {
         closePopup(popupImage);
     });
 
@@ -118,7 +114,11 @@ const createCard = (name, link) => {
 };
 
 const renderCard = (name, link) => {
-    containerElements.append(createCard(name, link));
+    cardsContainer.append(createCard(name, link));
+};
+
+const renderPrependCard = (name, link) => {
+    cardsContainer.prepend(createCard(name, link));
 };
 
 initialCards.forEach((item) => {
@@ -129,15 +129,15 @@ initialCards.forEach((item) => {
 
 const addCard = function (evt) {
     evt.preventDefault();
-    let form = evt.target.querySelector(".popup__input-block");
-    const popupCardNameInput = form.querySelector(".popup__input_type_place");
-    const popupCardPLinkInput = form.querySelector(".popup__input_type_link");
 
     let name = popupCardNameInput.value;
-    let link = popupCardPLinkInput.value;
+    let link = popupCardLinkInput.value;
 
-    renderCard(name, link);
+    popupCardNameInput.value = ' ';
+    popupCardLinkInput.value = ' ';
+    renderPrependCard(name, link);
     closePopup(popupAddElement);
 };
 
-popupAdd.addEventListener("submit", (evt) => addCard(evt));
+popupAddForm.addEventListener("submit", (evt) => addCard(evt));
+
