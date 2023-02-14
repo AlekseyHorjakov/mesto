@@ -84,9 +84,8 @@ const createCard = (name, link) => {
     //  Кнопка активации лайка
 
     const buttonLike = card.querySelector(".element__button-like");
-    buttonLike.addEventListener("click", function (evt) {
-        const evtLike = evt.target;
-        evtLike.classList.toggle("element__button-like_active");
+    buttonLike.addEventListener("click", function () {
+        buttonLike.classList.toggle("element__button-like_active");
     });
 
     //   Кнопка удаления карточки
@@ -104,12 +103,11 @@ const createCard = (name, link) => {
         popupZoomDescription.textContent = name;
         openPopup(popupImage);
     }
-
-
+    
     popupImageCloseButtonElement.addEventListener("click", function () {
         closePopup(popupImage);
     });
-
+    
     return card;
 };
 
@@ -130,8 +128,8 @@ initialCards.forEach((item) => {
 const addCard = function (evt) {
     evt.preventDefault();
 
-    let name = popupCardNameInput.value;
-    let link = popupCardLinkInput.value;
+    const name = popupCardNameInput.value;
+    const link = popupCardLinkInput.value;
 
     popupCardNameInput.value = ' ';
     popupCardLinkInput.value = ' ';
