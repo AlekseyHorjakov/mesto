@@ -9,6 +9,7 @@ const profileNameElement = profileElement.querySelector(".profile__name");
 const profileProfessionElement = profileElement.querySelector(".profile__profession");
 const popupNameElement = document.querySelector(".popup__input_type_name");
 const popupProfessionElement = document.querySelector(".popup__input_type_profession");
+const popupElements = Array.from(document.querySelectorAll('.popup'));
 
 // Объявляем переменные для окна добавление фотограффий
 
@@ -17,9 +18,15 @@ const popupAddButtonElement = document.querySelector(".profile__button-add");
 const popupAddCloseButtonElement = document.querySelector(".popup__close");
 
 // Открываем окна
+popupElements.forEach(popup => popup.addEventListener('click', (event) => {
+    if (event.target === popup) {
+        closePopup(popup);
+    }
+}))
 
 const openPopup = function (popup) {
     popup.classList.add("popup_opened");
+    document.addEventListener('keydown', closeByEsc)
 };
 popupEditButtonElement.addEventListener("click", function () {
     popupNameElement.value = profileNameElement.textContent;
@@ -31,7 +38,13 @@ popupAddButtonElement.addEventListener("click", function () {
     openPopup(popupAddElement);
 });
 
+
 // Закрываем окна
+
+function closeByEsc(event) {
+    if (event.key === 'Escape') closePopup(document.querySelector('.popup_opened'));
+};
+
 
 const closePopup = function (popup) {
     popup.classList.remove("popup_opened");
@@ -43,6 +56,8 @@ popupEditCloseButtonElement.addEventListener("click", function () {
 popupAddCloseButtonElement.addEventListener("click", function () {
     closePopup(popupAddElement);
 });
+
+
 
 // Меняем данные пользователя
 
