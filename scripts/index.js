@@ -9,7 +9,7 @@ const profileNameElement = profileElement.querySelector(".profile__name");
 const profileProfessionElement = profileElement.querySelector(".profile__profession");
 const popupNameElement = document.querySelector(".popup__input_type_name");
 const popupProfessionElement = document.querySelector(".popup__input_type_profession");
-const popupElements = Array.from(document.querySelectorAll('.popup'));
+const popupElements = Array.from(document.querySelectorAll(".popup"));
 
 // Объявляем переменные для окна добавление фотограффий
 
@@ -18,15 +18,17 @@ const popupAddButtonElement = document.querySelector(".profile__button-add");
 const popupAddCloseButtonElement = document.querySelector(".popup__close");
 
 // Открываем окна
-popupElements.forEach(popup => popup.addEventListener('click', (event) => {
-    if (event.target === popup) {
-        closePopup(popup);
-    }
-}))
+popupElements.forEach((popup) =>
+    popup.addEventListener("click", (event) => {
+        if (event.target === popup) {
+            closePopup(popup);
+        }
+    })
+);
 
 const openPopup = function (popup) {
     popup.classList.add("popup_opened");
-    document.addEventListener('keydown', closeByEsc)
+    document.addEventListener("keydown", closeByEsc);
 };
 popupEditButtonElement.addEventListener("click", function () {
     popupNameElement.value = profileNameElement.textContent;
@@ -38,13 +40,11 @@ popupAddButtonElement.addEventListener("click", function () {
     openPopup(popupAddElement);
 });
 
-
 // Закрываем окна
 
 function closeByEsc(event) {
-    if (event.key === 'Escape') closePopup(document.querySelector('.popup_opened'));
-};
-
+    if (event.key === "Escape") closePopup(document.querySelector(".popup_opened"));
+}
 
 const closePopup = function (popup) {
     popup.classList.remove("popup_opened");
@@ -56,8 +56,6 @@ popupEditCloseButtonElement.addEventListener("click", function () {
 popupAddCloseButtonElement.addEventListener("click", function () {
     closePopup(popupAddElement);
 });
-
-
 
 // Меняем данные пользователя
 
@@ -81,11 +79,10 @@ const popupZoomPicture = document.querySelector(".popup__image");
 const popupZoomDescription = document.querySelector(".popup__image-name");
 const popupImage = document.querySelector(".popup_type_image");
 const popupAdd = document.querySelector(".popup__form_add");
-const popupImageCloseButtonElement = popupImage.querySelector('.popup__button-close');
+const popupImageCloseButtonElement = popupImage.querySelector(".popup__button-close");
 const popupCardNameInput = document.querySelector(".popup__input_type_place");
 const popupCardLinkInput = document.querySelector(".popup__input_type_link");
-const popupAddForm = document.querySelector('.popup__form_add');
-
+const popupAddForm = document.querySelector(".popup__form_add");
 
 const createCard = (name, link) => {
     const card = elementTemplate.content.querySelector(".element").cloneNode(true);
@@ -118,11 +115,11 @@ const createCard = (name, link) => {
         popupZoomDescription.textContent = name;
         openPopup(popupImage);
     }
-    
+
     popupImageCloseButtonElement.addEventListener("click", function () {
         closePopup(popupImage);
     });
-    
+
     return card;
 };
 
@@ -146,11 +143,10 @@ const addCard = function (evt) {
     const name = popupCardNameInput.value;
     const link = popupCardLinkInput.value;
 
-    popupCardNameInput.value = ' ';
-    popupCardLinkInput.value = ' ';
+    popupCardNameInput.value = " ";
+    popupCardLinkInput.value = " ";
     renderPrependCard(name, link);
     closePopup(popupAddElement);
 };
 
 popupAddForm.addEventListener("submit", (evt) => addCard(evt));
-
