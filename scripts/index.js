@@ -23,6 +23,7 @@ const popupCardNameInput = document.querySelector(".popup__input_type_place");
 const popupCardLinkInput = document.querySelector(".popup__input_type_link");
 const popupAddForm = document.querySelector(".popup__form_add");
 const cardTemplateElement = cardTemplate.content.querySelector(".element")
+const buttonPlace = popupAddForm.querySelector(".popup__button-save");
 
 
 // Открываем окна
@@ -142,17 +143,16 @@ initialCards.forEach((item) => {popupAddForm
 
 // Добавление новой карточки
 
+
 const addCard = function (evt) {
     evt.preventDefault();
-    const buttonSaveOff = document.querySelector('.popup__button-save');
-    buttonSaveOff.disabled = true;
-    buttonSaveOff.classList.add('.popup__button-save_disabled');
     const name = popupCardNameInput.value;
     const link = popupCardLinkInput.value;
     renderPrependCard(name, link);
     popupAddForm.reset();
     closePopup(popupAddElement);
-    disableButton(evt);
+    buttonPlace.classList.add('popup__button-save_disabled');
+    buttonPlace.disabled = true;
 };
 
 popupAddForm.addEventListener("submit", (evt) => addCard(evt));
