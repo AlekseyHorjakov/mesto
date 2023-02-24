@@ -1,13 +1,7 @@
 .popup__form {
-    padding: 34px 36px 37px;
-    width: 430px;
-    background-color: #fff;
-    color: #000;
-    border-radius: 10px;
-    box-sizing: border-box;
-    margin: 0;
-    display: grid;
-    row-gap: 37px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 54px;
 }
 
 @media screen and (max-width: 768px) {

@@ -23,7 +23,7 @@ const popupCardNameInput = document.querySelector(".popup__input_type_place");
 const popupCardLinkInput = document.querySelector(".popup__input_type_link");
 const popupAddForm = document.querySelector(".popup__form_add");
 const cardTemplateElement = cardTemplate.content.querySelector(".element")
-const buttonPlace = popupAddForm.querySelector(".popup__button-save");
+const buttonAddPlace = popupAddForm.querySelector(".popup__button-save");
 
 
 // Открываем окна
@@ -31,6 +31,7 @@ const buttonPlace = popupAddForm.querySelector(".popup__button-save");
 const openPopup = function (popup) {
     popup.classList.add("popup_opened");
     document.addEventListener("keydown", closeByEsc);
+   
 };
     
 
@@ -43,6 +44,7 @@ popupEditButtonElement.addEventListener("click", function () {
 
 popupAddButtonElement.addEventListener("click", function () {
     openPopup(popupAddElement);
+   
    });
 
 // Закрываем окна
@@ -127,8 +129,6 @@ const createCard = (name, link) => {
 };
 
 
-
-
 const renderCard = (name, link) => {
     cardsContainer.append(createCard(name, link));
 };
@@ -137,7 +137,7 @@ const renderPrependCard = (name, link) => {
     cardsContainer.prepend(createCard(name, link));
 };
 
-initialCards.forEach((item) => {popupAddForm
+initialCards.forEach((item) => {
     renderCard(item.name, item.link);
 });
 
@@ -151,8 +151,8 @@ const addCard = function (evt) {
     renderPrependCard(name, link);
     popupAddForm.reset();
     closePopup(popupAddElement);
-    buttonPlace.classList.add('popup__button-save_disabled');
-    buttonPlace.disabled = true;
+    buttonAddPlace.classList.add('popup__button-save_disabled');
+    buttonAddPlace.disabled = true;
 };
 
 popupAddForm.addEventListener("submit", (evt) => addCard(evt));
