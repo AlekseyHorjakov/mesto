@@ -1,83 +1,54 @@
 import {
     popupZoomPicture,
     popupZoomDescription,
-    popupCardNameInput,
-    popupCardLinkInput,
-    buttonAddPlace,
-    popupAddForm,
-    card,
     openPopup,
-    closePopup,
-    popupAddElement,
     popupImage
 } from './index.js';
 
 export default class Card {
-    _initialCards;
-    _cardTemplateElement;
-    _cardsContainer;
-
-    constructor(initialCards, template) {
-        this._initialCards = initialCards;
-        let cardTemplate = document.querySelector(template);
-        this._cardTemplateElement = cardTemplate.content.querySelector(".element");
-        this._cardsContainer = document.querySelector(".elements");
-        this._initialCards.forEach((item) => {
-            this._renderCard(item.name, item.link);
-        });
-        popupAddForm.addEventListener("submit", (evt) => card.addCard(evt));
+    constructor(name, link, template){
+        const cardTemplate = document.querySelector(template);
+        const cardTemplateElement = cardTemplate.content.querySelector(".element")
+        this._name = name;
+        this._link = link;
+        this._card = cardTemplateElement.cloneNode(true);
+        this._cardName = this._card.querySelector(".element__name");
+        this._cardImage = this._card.querySelector(".element__image");
+        this._cardImage.src = link;
+        this._cardName.textContent = name;
+        this._cardImage.alt = name;
     }
 
-    addCard(evt){
-        evt.preventDefault();
-        const name = popupCardNameInput.value;
-        const link = popupCardLinkInput.value;
-        this._renderPrependCard(name, link);
-        popupAddForm.reset();
-        closePopup(popupAddElement);
-        buttonAddPlace.classList.add('popup__button-save_disabled');
-        buttonAddPlace.disabled = true;
-    };
+    createCard(){
+        this._likeCard();
+        this._delCard();
+        this._zoomCard();
+        return this._card;
+    }
 
-    _createCard(name, link) {
-        const card = this._cardTemplateElement.cloneNode(true);
-        const cardName = card.querySelector(".element__name");
-        const cardImage = card.querySelector(".element__image");
-        cardImage.src = link;
-        cardName.textContent = name;
-        cardImage.alt = name;
-        cardImage.addEventListener("click", () => this._zoomPopup(link, name));
-
-        //  Кнопка активации лайка
-
-        const buttonLike = card.querySelector(".element__button-like");
+    _likeCard(){
+        const buttonLike = this._card.querySelector(".element__button-like");
         buttonLike.addEventListener("click", function () {
             buttonLike.classList.toggle("element__button-like_active");
         });
-
-        //   Кнопка удаления карточки
-
-        const buttonDell = card.querySelector(".element__button-delete");
-        buttonDell.addEventListener("click", () => {
-            card.remove();
-        });
-        
-        return card;
     }
 
-    _zoomPopup(link, name) {
-        popupZoomPicture.src = link;
-        popupZoomPicture.alt = name;
-        popupZoomDescription.textContent = name;
+    _delCard(){
+        const buttonDell = this._card.querySelector(".element__button-delete");
+        buttonDell.addEventListener("click", () => {
+            this._card.remove();
+        });
+    }
+
+    _zoomCard(){
+        this._cardImage.addEventListener("click", () => this._zoomPopup());
+    }
+
+    _zoomPopup() {
+        popupZoomPicture.src = this._link;
+        popupZoomPicture.alt = this._name;
+        popupZoomDescription.textContent = this._name;
         openPopup(popupImage);
     }
-
-    _renderCard(name, link) {
-        this._cardsContainer.append(this._createCard(name, link));
-    };
-
-    _renderPrependCard(name, link) {
-        this._cardsContainer.prepend(this._createCard(name, link));
-    };
 
 }

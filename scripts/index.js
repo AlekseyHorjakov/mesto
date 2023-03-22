@@ -23,9 +23,25 @@ export const popupCardNameInput = document.querySelector(".popup__input_type_pla
 export const popupCardLinkInput = document.querySelector(".popup__input_type_link");
 export const popupAddForm = document.querySelector(".popup__form_add");
 export const buttonAddPlace = popupAddForm.querySelector(".popup__button-save");
+const cardsContainer = document.querySelector(".elements");
 
+const initialCards = [
+    { name: "Архыз", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" },
+    { name: "Челябинская область", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" },
+    { name: "Иваново", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" },
+    { name: "Камчатка", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" },
+    { name: "Холмогорский район", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" },
+    { name: "Байкал", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" },
+];
 
-// Открываем окна
+const validationConfig = {
+    formSelector: ".popup__form",
+    inputSelector: ".popup__input",
+    submitButtonSelector: ".popup__button-save",
+    inactiveButtonClass: "popup__button-save_disabled",
+    inputErrorClass: "popup__input-error",
+    errorClass: "popup__error_visible",
+};
 
 export const openPopup = function (popup) {
     popup.classList.add("popup_opened");
@@ -60,7 +76,7 @@ function closeByEsc(event) {
     if (event.key === "Escape") closePopup(document.querySelector(".popup_opened"));
 }
 
-export const closePopup = function (popup) {
+const closePopup = function (popup) {
     popup.classList.remove("popup_opened");
     document.removeEventListener("keydown", closeByEsc);
 };
@@ -88,35 +104,47 @@ const editProfile = function (evt) {
 };
 popupEditForm.addEventListener("submit", editProfile);
 
+// При загрузке на странице загружаются 6 карточек, которые добавит JavaScript
 
-//Создание карточек
-
-const initialCards = [
-    { name: "Архыз", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" },
-    { name: "Челябинская область", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" },
-    { name: "Иваново", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" },
-    { name: "Камчатка", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" },
-    { name: "Холмогорский район", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" },
-    { name: "Байкал", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" },
-];
-
-export let card = new Card(initialCards, '#elements');
+//   Определяем место, куда добавляются карточки и выгружаем туда содержимое template
 
 
-const validationConfig = {
-    formSelector: ".popup__form",
-    submitButtonSelector: ".popup__button-save",
-    inactiveButtonClass: "popup__button-save_disabled",
-    inputErrorClass: "popup__input-error",
-    errorClass: "popup__error_visible",
+
+const renderCard = (name, link) => {
+    let card = new Card(name, link, "#elements");
+    cardsContainer.append(card.createCard());
 };
 
-let inputLink = new FormValidator(validationConfig, document.getElementById('inputLink'));
-inputLink.enableValidation();
-let inputPlace = new FormValidator(validationConfig, document.getElementById('inputPlace'));
-inputPlace.enableValidation();
-let inputProfession = new FormValidator(validationConfig, document.getElementById('inputProfession'));
-inputProfession.enableValidation();
-let inputName = new FormValidator(validationConfig, document.getElementById('inputName'));
-inputName.enableValidation();
+const renderPrependCard = (name, link) => {
+    let card = new Card(name, link, "#elements");
+    cardsContainer.prepend(card.createCard());
+};
 
+initialCards.forEach((item) => {
+    renderCard(item.name, item.link, "#elements");
+});
+
+// Добавление новой карточки
+
+
+const addCard = function (evt) {
+    evt.preventDefault();
+    const name = popupCardNameInput.value;
+    const link = popupCardLinkInput.value;
+    renderPrependCard(name, link);
+    popupAddForm.reset();
+    closePopup(popupAddElement);
+    buttonAddPlace.classList.add('popup__button-save_disabled');
+    buttonAddPlace.disabled = true;
+};
+
+popupAddForm.addEventListener("submit", (evt) => addCard(evt));
+
+
+//Валидация формы редактирования профиля
+let formUdate = new FormValidator(validationConfig, document.querySelector('#editForm'));
+formUdate.enableValidation();
+
+//Валидация формы создания карточки
+let formCreate = new FormValidator(validationConfig, document.querySelector('#createForm'));
+formCreate.enableValidation();
