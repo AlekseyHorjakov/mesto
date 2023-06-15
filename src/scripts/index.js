@@ -2,9 +2,11 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import { PopupWithForm } from './PopupWithForm.js';
+import { PopupWithImage } from './PopupWithImage.js';
 import UserInfo from './UserInfo.js';
 import Popup from './Popup.js';
-// Объявляем переменные 
+import '../pages/index.css';
+// Объявляем переменные
 
 const popupEditElement = document.querySelector(".popup_type_edit");
 const popupEditButtonElement = document.querySelector(".profile__edit");
@@ -19,8 +21,6 @@ const popupElements = Array.from(document.querySelectorAll(".popup"));
 const popupAddElement = document.querySelector(".popup_type_add");
 const popupAddButtonElement = document.querySelector(".profile__button-add");
 const popupAddCloseButtonElement = document.querySelector(".popup__close");
-const popupZoomPicture = document.querySelector(".popup__image");
-const popupZoomDescription = document.querySelector(".popup__image-name");
 const popupImage = document.querySelector(".popup_type_image");
 const popupImageCloseButtonElement = popupImage.querySelector(".popup__button-close");
 const popupCardNameInput = document.querySelector(".popup__input_type_place");
@@ -30,25 +30,25 @@ const buttonAddPlace = popupAddForm.querySelector(".popup__button-save");
 const cardsContainer = document.querySelector(".elements");
 
 const initialCards = [
-    { name: "Архыз", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" },
-    { name: "Челябинская область", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" },
-    { name: "Иваново", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" },
-    { name: "Камчатка", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" },
-    { name: "Холмогорский район", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" },
-    { name: "Байкал", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" },
+  { name: "Архыз", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" },
+  { name: "Челябинская область", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg" },
+  { name: "Иваново", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg" },
+  { name: "Камчатка", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" },
+  { name: "Холмогорский район", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg" },
+  { name: "Байкал", link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" },
 ];
 
 const validationConfig = {
-    formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__button-save",
-    inactiveButtonClass: "popup__button-save_disabled",
-    inputErrorClass: "popup__input-error",
-    errorClass: "popup__error_visible",
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button-save",
+  inactiveButtonClass: "popup__button-save_disabled",
+  inputErrorClass: "popup__input-error",
+  errorClass: "popup__error_visible",
 };
 
 //Информация о пользователе
-const userInfo = new UserInfo({elementPopupInputName: profileNameElement.textContent, elementPopupInputProfession: profileProfessionElement.textContent});
+const userInfo = new UserInfo({ elementPopupInputName: profileNameElement.textContent, elementPopupInputProfession: profileProfessionElement.textContent });
 
 //Валидация формы редактирования профиля
 const formUdate = new FormValidator(validationConfig, document.querySelector('#editForm'));
@@ -60,44 +60,41 @@ formCreate.enableValidation();
 
 //Функция редактирования информации пользователя
 const editProfile = function (item) {
-    userInfo.setUserInfo(item);
-    profileNameElement.textContent = item.elementPopupInputName;
-    profileProfessionElement.textContent = item.elementPopupInputProfession;
+  userInfo.setUserInfo(item);
+  profileNameElement.textContent = item.elementPopupInputName;
+  profileProfessionElement.textContent = item.elementPopupInputProfession;
 };
 //Всплывающее окно редактирвоания
 const popupEdit = new PopupWithForm('.popup_type_edit', editProfile);
 
 popupEditButtonElement.addEventListener("click", function () {
-    const item = userInfo.getUserInfo();
-    popupNameElement.value = item.elementPopupInputName;
-    popupProfessionElement.value = item.elementPopupInputProfession;
-    popupEdit.open();
+  const item = userInfo.getUserInfo();
+  popupNameElement.value = item.elementPopupInputName;
+  popupProfessionElement.value = item.elementPopupInputProfession;
+  popupEdit.open();
 });
 //Функция добавления карточки
 const addCard = function (item) {
-    cardsContainer.prepend(createCard({ name: item.elementPopupInputPlace, link: item.elementPopupInputLink }));
-    formCreate.resetValid();
+  cardsContainer.prepend(createCard({ name: item.elementPopupInputPlace, link: item.elementPopupInputLink }));
+  formCreate.resetValid();
 };
 //Всплывающее окно добавления карточки
 const popupAdd = new PopupWithForm('.popup_type_add', addCard);
 
 popupAddButtonElement.addEventListener("click", function () {
-    popupAdd.open();
+  popupAdd.open();
 });
 //Всплывающее окно Карточки
-const popupCard = new Popup('.popup_type_image');
+const popupCard = new PopupWithImage('.popup_type_image');
 
 function handleCardClick() {
-    popupZoomPicture.src = this._link;
-    popupZoomPicture.alt = this._name;
-    popupZoomDescription.textContent = this._name;
-    popupCard.open();
+  popupCard.open(this._link, this._name);
 }
 
 function createCard(item) {
-    const card = new Card(item, "#elements", handleCardClick)
-    const cardElement = card.createCard();
-    return cardElement;
+  const card = new Card(item, "#elements", handleCardClick)
+  const cardElement = card.createCard();
+  return cardElement;
 }
 const section = new Section({ items: initialCards, renderer: createCard }, '.elements');
 section.renderItems();
