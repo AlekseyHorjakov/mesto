@@ -1,10 +1,10 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import UserInfo from './UserInfo.js';
-import Popup from './Popup.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import Popup from '../components/Popup.js';
 import '../pages/index.css';
 // Объявляем переменные
 
@@ -73,13 +73,7 @@ popupEditButtonElement.addEventListener("click", function () {
   popupProfessionElement.value = item.elementPopupInputProfession;
   popupEdit.open();
 });
-//Функция добавления карточки
-const addCard = function (item) {
-  cardsContainer.prepend(createCard({ name: item.elementPopupInputPlace, link: item.elementPopupInputLink }));
-  formCreate.resetValid();
-};
-//Всплывающее окно добавления карточки
-const popupAdd = new PopupWithForm('.popup_type_add', addCard);
+
 
 popupAddButtonElement.addEventListener("click", function () {
   popupAdd.open();
@@ -96,5 +90,15 @@ function createCard(item) {
   const cardElement = card.createCard();
   return cardElement;
 }
-const section = new Section({ items: initialCards, renderer: createCard }, '.elements');
-section.renderItems();
+const section = new Section(createCard, '.elements');
+section.renderItems(initialCards);
+
+//Функция добавления карточки
+const addCard = function (item) {
+  section.addItem({ name: item.elementPopupInputPlace, link: item.elementPopupInputLink }, true);
+  formCreate.resetValid();
+};
+
+//Всплывающее окно добавления карточки
+const popupAdd = new PopupWithForm('.popup_type_add', addCard);
+

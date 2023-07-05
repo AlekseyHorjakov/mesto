@@ -63,8 +63,7 @@ export default class FormValidator {
 
   resetValid() {
     this._toggleButton();
-    this._inputs.forEach((input) => {
-      this._hideError(input);
-    });
+    this._button.disabled = true;
+    this._button.classList.add(this._config.inactiveButtonClass);
   }
 }

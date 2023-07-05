@@ -14,12 +14,13 @@ export default class Card {
         this._cardImage.src = this._link;
         this._cardName.textContent = this._name;
         this._cardImage.alt = this._name;
+        this._buttonLike = this._card.querySelector('.element__button-like') ;
         this._setEventListeners();
         return this._card;
     }
 
-    _likeCard(evt) {
-        evt.target.classList.toggle("element__button-like_active");
+    _likeCard() {
+        this._buttonLike.classList.toggle("element__button-like_active");
     }
 
     _deleteCard() {
@@ -28,7 +29,7 @@ export default class Card {
 
     _setEventListeners() {
         this._card.querySelector(".element__button-delete").addEventListener("click", () => { this._deleteCard() });
-        this._card.querySelector(".element__button-like").addEventListener("click", (e) => { this._likeCard(e) });
+        this._buttonLike.addEventListener("click", () => { this._likeCard() });
         this._cardImage.addEventListener('click', () => {
             this._handleCardClick(this._name, this._link);
         });
