@@ -48,7 +48,7 @@ const validationConfig = {
 };
 
 //Информация о пользователе
-const userInfo = new UserInfo({ elementPopupInputName: profileNameElement.textContent, elementPopupInputProfession: profileProfessionElement.textContent });
+const userInfo = new UserInfo({ elementPopupInputName: profileNameElement, elementPopupInputProfession: profileProfessionElement });
 
 //Валидация формы редактирования профиля
 const formUdate = new FormValidator(validationConfig, document.querySelector('#editForm'));
@@ -58,14 +58,8 @@ formUdate.enableValidation();
 const formCreate = new FormValidator(validationConfig, document.querySelector('#createForm'));
 formCreate.enableValidation();
 
-//Функция редактирования информации пользователя
-const editProfile = function (item) {
-  userInfo.setUserInfo(item);
-  profileNameElement.textContent = item.elementPopupInputName;
-  profileProfessionElement.textContent = item.elementPopupInputProfession;
-};
 //Всплывающее окно редактирвоания
-const popupEdit = new PopupWithForm('.popup_type_edit', editProfile);
+const popupEdit = new PopupWithForm('.popup_type_edit', (item) => userInfo.setUserInfo(item));
 
 popupEditButtonElement.addEventListener("click", function () {
   const item = userInfo.getUserInfo();
@@ -95,7 +89,7 @@ section.renderItems(initialCards);
 
 //Функция добавления карточки
 const addCard = function (item) {
-  section.addItem({ name: item.elementPopupInputPlace, link: item.elementPopupInputLink }, true);
+  section.prependItem({ name: item.elementPopupInputPlace, link: item.elementPopupInputLink });
   formCreate.resetValid();
 };
 

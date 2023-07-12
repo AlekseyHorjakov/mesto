@@ -6,24 +6,15 @@ export default class Section {
 
   renderItems(items) {
     items.forEach(item => { 
-      this.addItem(item);
+      this.appendItem(item);
     })
   }
 
-  _appendItem(item) {
-    this._container.append(item);
+  appendItem(item) {
+    this._container.append(this._renderer(item));
   }
 
-  _prependItem(item) {
-    this._container.prepend(item);
-  }
-  
-  addItem(item, isInversed = false) {
-    const element = this._renderer(item);
-    if (isInversed) {
-      this._prependItem(element);
-    } else {
-      this._appendItem(element);
-    }
+  prependItem(item) {
+    this._container.prepend(this._renderer(item));
   }
 }
